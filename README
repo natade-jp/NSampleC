@@ -1,0 +1,9 @@
+NSampleC
+
+【作成】
+natade / https://twitter.com/natadea
+
+【概要】
+ライセンスは、NYSLです。
+動作の勉強用に作っているC/C++言語のサンプルプログラムです。
+Linux で make を入力すれば build できます。
