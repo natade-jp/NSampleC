@@ -44,7 +44,7 @@ public:
 	void show(void) {
 		double cpu_time = getDiffMSEC(&ts_cpu_start, &ts_cpu_end);
 		double my_time  = getDiffMSEC(&ts_time_start, &ts_time_end);
-		printf("実時間 %f.6 ms\tCPU時間 %f.6 ms\tCPU使用率 %1.1f %%\n",
+		printf("実時間 %f ms\tCPU時間 %f ms\tCPU使用率 %1.1f %%\n",
 			my_time,
 			cpu_time,
 			100.0 * cpu_time / my_time
@@ -71,17 +71,22 @@ int test(void) {
 	sw.start();sleep(1);sw.stop();sw.show();
 	
 	/*
+		おそらく細かい時間は、sleep自体を何回か連続で呼び出して、
+		平均を出さないと時間の性能自体が正しく測れないと思われます。
+		まあ参考程度な感じで見てください。
+		「Raspberry Pi 2」で「Raspbian OS」で動作した場合です。
+		
 		pi@raspberrypi: $ ./Sleep
-		実時間 0.181197.6 ms    CPU時間 0.131876.6 ms   CPU使用率 72.8 %
-		実時間 0.082603.6 ms    CPU時間 0.034792.6 ms   CPU使用率 42.1 %
-		実時間 0.101926.6 ms    CPU時間 0.031980.6 ms   CPU使用率 31.4 %
-		実時間 0.161719.6 ms    CPU時間 0.043854.6 ms   CPU使用率 27.1 %
-		実時間 0.093333.6 ms    CPU時間 0.034219.6 ms   CPU使用率 36.7 %
-		実時間 0.183437.6 ms    CPU時間 0.034480.6 ms   CPU使用率 18.8 %
-		実時間 1.084007.6 ms    CPU時間 0.034740.6 ms   CPU使用率 3.2 %
-		実時間 10.080021.6 ms   CPU時間 0.032499.6 ms   CPU使用率 0.3 %
-		実時間 100.095942.6 ms  CPU時間 0.043229.6 ms   CPU使用率 0.0 %
-		実時間 1000.125834.6 ms CPU時間 0.073646.6 ms   CPU使用率 0.0 %
+		実時間 0.152499 ms      CPU時間 0.103489 ms     CPU使用率 67.9 %
+		実時間 0.079531 ms      CPU時間 0.025207 ms     CPU使用率 31.7 %
+		実時間 0.075208 ms      CPU時間 0.023646 ms     CPU使用率 31.4 %
+		実時間 0.084323 ms      CPU時間 0.032969 ms     CPU使用率 39.1 %
+		実時間 0.081302 ms      CPU時間 0.022032 ms     CPU使用率 27.1 %
+		実時間 0.170155 ms      CPU時間 0.022188 ms     CPU使用率 13.0 %
+		実時間 1.070309 ms      CPU時間 0.022395 ms     CPU使用率 2.1 %
+		実時間 10.071323 ms     CPU時間 0.022396 ms     CPU使用率 0.2 %
+		実時間 100.096305 ms    CPU時間 0.040520 ms     CPU使用率 0.0 %
+		実時間 1000.130244 ms   CPU時間 0.077188 ms     CPU使用率 0.0 %
 	*/
 	
 	return 0;

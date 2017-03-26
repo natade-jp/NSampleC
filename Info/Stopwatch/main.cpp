@@ -48,7 +48,7 @@ public:
 		cpu_time = getDiffMSEC(&ts1_cpu, &ts2_cpu);
 		my_time  = getDiffMSEC(&ts1_time, &ts2_time);
 		
-		printf("実時間 %f.6 ms\nCPU時間 %f.6 ms\nCPU使用率 %1.1f %%\n",
+		printf("実時間 %.6f ms\nCPU時間 %.6f ms\nCPU使用率 %1.1f %%\n",
 			my_time,
 			cpu_time,
 			100.0 * cpu_time / my_time
