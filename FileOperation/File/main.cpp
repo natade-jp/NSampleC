@@ -1,9 +1,18 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// stat
+// open
+#include <fcntl.h>
+
+// remove
+#include <stdio.h>
+
+// rmdir / unlink
+#include <unistd.h>
+
+// stat / mkdir
 #include <sys/stat.h>
+#include <sys/types.h>
 
 class PathData {
 private:
@@ -28,13 +37,9 @@ public:
 class FileOperation {
 private:
 	PathData cPath;
-	FILE *fp;
-	bool isOpen;
 public:
 	FileOperation(const char* strTarget) {
 		cPath	= strTarget;
-		fp		= NULL;
-		isOpen	= false;
 		return;
 	}
 	~FileOperation(void) {
@@ -74,20 +79,73 @@ public:
 		}
 		return kStat.st_size;
 	}
+	int makeDirectory(void) {
+		if(isExist()) {
+			return -1;
+		}
+		{
+			int ret = mkdir((char *)cPath, S_IRWXU | S_IRWXG);
+			return ret;
+		}
+	}
+	int deleteDirectory(void) {
+		return rmdir((char *)cPath);
+	}
+	int writeFile(const void *vTarget, int iByteSize, unsigned int uiOffset) {
+		int fd			= 0;
+		int iWriteSize	= 0;
+		int iRet		= 0;
+		
+		// ファイルを開く
+		fd = open((char *)cPath, O_WRONLY | O_CREAT );
+		if(fd == -1) {
+			return -1;
+		}
+		
+		// 先頭からシークさせる。
+		iRet = lseek(fd, uiOffset, SEEK_SET);
+		if(iRet == -1) {
+			return -1;
+		}
+		
+		// ファイルを書き込む
+		iWriteSize = write(fd, vTarget, iByteSize); 
+		
+		close(fd);
+		return iWriteSize;
+	}
 	
-	
+	int deleteFile(void) {
+		return unlink((char *)cPath);
+	}
 	operator char*() {
 		return cPath;
 	}
 };
 
 int main(){
-	FileOperation *fileop = new FileOperation("File");
-	printf("%s\n", (char *)fileop );
-	printf("isExist %d\n",		fileop->isExist() );
-	printf("isFile %d\n",		fileop->isFile() );
-	printf("isDirectory %d\n",	fileop->isDirectory() );
-	printf("getSize %d\n",		fileop->getSize() );
-	delete fileop;
+	{
+		FileOperation fileop("TestDirectory");
+		printf("%s\n", (char *)fileop );
+		fileop.makeDirectory();
+		sleep(1);
+		printf("isExist %d\n",		fileop.isExist() );
+		printf("isFile %d\n",		fileop.isFile() );
+		printf("isDirectory %d\n",	fileop.isDirectory() );
+		printf("getSize %d\n",		fileop.getSize() );
+		fileop.deleteDirectory();
+		sleep(1);
+		printf("isExist %d\n",		fileop.isExist() );
+	}
+	{
+		char strWrite[512] = { '\0' };
+		char strRead[512] = { '\0' };
+		FileOperation fileop("test.txt");
+		
+		snprintf(strWrite, sizeof(strWrite), "あいうえお");
+				
+		fileop.writeFile(strWrite, strlen(strWrite), 0);
+		sleep(1);
+	}
 	return 0;
 }
