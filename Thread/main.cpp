@@ -1,12 +1,17 @@
 #include <stdio.h>
 
-// usleep
+// sleep
 #include <unistd.h>
+
+// queue
+#include <queue>
 
 // thread
 #include <pthread.h>
 
 #define MYLOG printf("%s:%d\n", __FILE__, __LINE__);
+
+using namespace std;
 
 // thread sample code
 // https://github.com/natade-jp/NSampleC
@@ -19,14 +24,23 @@ private:
 	pthread_mutex_t		kMyMutex;
 	pthread_mutex_t		kCondMutex;
 	pthread_cond_t		kCond;
+	queue<int>			kQueue;
 	
 	void vMainLoop() {
 		while(true) {
-			// 起こされるまで待つ
+			// wait 起こされるまで待つ
 			// pthread_cond_timedwait を使用する場合は、第3引数は絶対時刻なので注意
 			// pthread_cond_wait は pthread_testcancel 代わりにもなる
 			pthread_cond_wait(&kCond, &kCondMutex);
-			printf("run\n");
+			
+			while(!kQueue.empty()) {
+				// 取り出して
+				int iNumber = kQueue.front();
+				// 取り出し終わったので削除
+				kQueue.pop();
+				// 処理開始
+				printf("run[%d]\n", iNumber);
+			}
 		}
 	}
 	
@@ -109,14 +123,21 @@ public:
 		}
 		return 0;
 	}
-	int wake() {
+	int job(int iNumber) {
+		if(!isRun) {
+			return -1;
+		}
+		
 		if(pthread_mutex_lock(&kMyMutex) != 0) {
 			perror("pthread_mutex_lock()");
 			return -1;
 		}
 		
 		if(isRun == true) {
-			// スレッドを起こす
+			// 仕事を積む
+			kQueue.push(iNumber);
+			
+			// wake / notify スレッドを起こす
 			pthread_cond_signal(&kCond);
 		}
 		
@@ -135,12 +156,23 @@ int main(void){
 	
 	{
 		Thread thread;
+		
+		// スレッド開始
+		printf("start thread\n");
 		thread.run();
-		printf("ok1\n");
-		thread.wake();
-		sleep(1);
+		{
+			printf("仕事の支持を開始\n");
+			// この100の処理はスレッドが処理をする
+			thread.job(100);
+			thread.job(200);
+			thread.job(300);
+			thread.job(400);
+			printf("仕事の指示を終了\n");
+		}
+		usleep(1000*100);
+		
+		printf("stop thread\n");
 		thread.stop();
-		printf("ok2\n");
 	}
 	
 	return 0;
