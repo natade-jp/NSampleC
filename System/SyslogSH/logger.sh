@@ -8,7 +8,7 @@ echo "settings = " $LOGSETTINGFILE
 # (/\w+)+/messages のワードを調べて、ファイルパスを調べる
 # o ... マッチする部分を調べる
 # e ... 正規表現を使用する
-LOGFILE=`cat /etc/rsyslog.conf | grep -oe "\(/\w\+\)\+/messages"`
+LOGFILE=`cat $LOGSETTINGFILE | grep -oe "\(/\w\+\)\+/messages"`
 echo "logfile = " $LOGFILE
 
 # バックグラウンドでログファイルを表示させる
@@ -20,7 +20,7 @@ tail -f $LOGFILE &
 logger -p syslog.info -t APPLICATION_NAME "data"
 
 # 少し待つ
-sleep 3
+sleep 1
 
 #終了
 killall tail
