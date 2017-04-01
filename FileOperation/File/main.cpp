@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+// errno
+#include  <errno.h>
+
 // open
 #include <fcntl.h>
 
@@ -25,7 +28,7 @@ public:
 	}
 	// イコールはコピーと同等とする
 	PathData& operator=(const char *strData) {
-		strncpy(strPath, strData, sizeof(strPath));
+		strncpy(strPath, strData, sizeof(strPath) - 1);
 		return *this;
 	}
 	// charへのキャストが可能とする
@@ -91,20 +94,83 @@ public:
 	int deleteDirectory(void) {
 		return rmdir((char *)cPath);
 	}
+	int fwriteFile(const void *vTarget, int iByteSize, unsigned int uiOffset) {
+		FILE *fp		= NULL;
+		int iWriteSize	= 0;
+		int iRet		= 0;
+		
+		// ファイルを開く
+		if(isExist()) {
+			// 既に存在していれば、「ストリームはファイルの先頭」で開く
+			fp = fopen((char *)cPath, "r+" );
+		}
+		else {
+			// ファイルを作成して、「ストリームはファイルの先頭」で開く
+			fp = fopen((char *)cPath, "w" );
+		}
+		if(fp == NULL) {
+			printf("ERROR(%d) %s\n", errno, strerror(errno));
+			return -1;
+		}
+		
+		// 先頭からシークさせる。
+		iRet = fseek(fp, uiOffset, SEEK_SET);
+		if(iRet == -1) {
+			printf("ERROR(%d) %s\n", errno, strerror(errno));
+			fclose(fp);
+			return -1;
+		}
+		
+		// ファイルを書き込む
+		iWriteSize = fwrite(vTarget, 1, iByteSize, fp); 
+		
+		fclose(fp);
+		return iWriteSize;
+	}
+	int freadFile(void *vTarget, int iByteSize, unsigned int uiOffset) {
+		FILE *fp		= NULL;
+		int iReadSize	= 0;
+		int iRet		= 0;
+		
+		// ファイルを開く
+		fp = fopen((char *)cPath, "r" );
+		if(fp == NULL) {
+			printf("ERROR(%d) %s\n", errno, strerror(errno));
+			return -1;
+		}
+		
+		// 先頭からシークさせる。
+		iRet = fseek(fp, uiOffset, SEEK_SET);
+		if(iRet == -1) {
+			printf("ERROR(%d) %s\n", errno, strerror(errno));
+			fclose(fp);
+			return -1;
+		}
+		
+		// ファイルを読み込む
+		iReadSize = fread(vTarget, 1, iByteSize, fp); 
+		
+		fclose(fp);
+		return iReadSize;
+	}
 	int writeFile(const void *vTarget, int iByteSize, unsigned int uiOffset) {
 		int fd			= 0;
 		int iWriteSize	= 0;
 		int iRet		= 0;
 		
-		// ファイルを開く
-		fd = open((char *)cPath, O_WRONLY | O_CREAT );
+		// 書き込みモードでファイルを開く
+		// (ファイルが存在しなかった場合は作成し、権限を 0700 とする。
+		fd = open((char *)cPath, O_WRONLY | O_CREAT, S_IRWXU );
 		if(fd == -1) {
+			printf("ERROR(%d) %s\n", errno, strerror(errno));
 			return -1;
 		}
 		
 		// 先頭からシークさせる。
 		iRet = lseek(fd, uiOffset, SEEK_SET);
 		if(iRet == -1) {
+			printf("ERROR(%d) %s\n", errno, strerror(errno));
+			close(fd);
 			return -1;
 		}
 		
@@ -114,6 +180,33 @@ public:
 		close(fd);
 		return iWriteSize;
 	}
+	int readFile(void *vTarget, int iByteSize, unsigned int uiOffset) {
+		int fd			= 0;
+		int iReadSize	= 0;
+		int iRet		= 0;
+		
+		// 読み込みモードでファイルを開く
+		fd = open((char *)cPath, O_RDONLY );
+		if(fd == -1) {
+			printf("ERROR(%d) %s\n", errno, strerror(errno));
+			return -1;
+		}
+		
+		// 先頭からシークさせる。
+		iRet = lseek(fd, uiOffset, SEEK_SET);
+		if(iRet == -1) {
+			printf("ERROR(%d) %s\n", errno, strerror(errno));
+			close(fd);
+			return -1;
+		}
+		
+		// ファイルを読み込む
+		iReadSize = read(fd, vTarget, iByteSize); 
+		
+		close(fd);
+		return iReadSize;
+	}
+	
 	
 	int deleteFile(void) {
 		return unlink((char *)cPath);
@@ -124,28 +217,40 @@ public:
 };
 
 int main(){
+	// directory
 	{
 		FileOperation fileop("TestDirectory");
 		printf("%s\n", (char *)fileop );
 		fileop.makeDirectory();
-		sleep(1);
 		printf("isExist %d\n",		fileop.isExist() );
 		printf("isFile %d\n",		fileop.isFile() );
 		printf("isDirectory %d\n",	fileop.isDirectory() );
-		printf("getSize %d\n",		fileop.getSize() );
 		fileop.deleteDirectory();
-		sleep(1);
 		printf("isExist %d\n",		fileop.isExist() );
 	}
+	// fopen / fread
 	{
 		char strWrite[512] = { '\0' };
 		char strRead[512] = { '\0' };
 		FileOperation fileop("test.txt");
-		
-		snprintf(strWrite, sizeof(strWrite), "あいうえお");
-				
-		fileop.writeFile(strWrite, strlen(strWrite), 0);
-		sleep(1);
+		snprintf(strWrite, sizeof(strWrite) - 1, "ABCDEFG");
+		fileop.fwriteFile(strWrite, strlen(strWrite), 1);
+		printf("fwrite %s\n",		strWrite );
+		fileop.freadFile(strRead, 5, 1);
+		printf("fread %s\n",		strRead );
+		fileop.deleteFile();
+	}
+	// open / read
+	{
+		char strWrite[512] = { '\0' };
+		char strRead[512] = { '\0' };
+		FileOperation fileop("test.txt");
+		snprintf(strWrite, sizeof(strWrite) - 1, "ABCDEFG");
+		fileop.writeFile(strWrite, strlen(strWrite), 1);
+		printf("write %s\n",		strWrite );
+		fileop.readFile(strRead, 5, 1);
+		printf("read %s\n",			strRead );
+		fileop.deleteFile();
 	}
 	return 0;
 }
