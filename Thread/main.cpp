@@ -161,7 +161,7 @@ int main(void){
 		printf("start thread\n");
 		thread.run();
 		{
-			printf("仕事の支持を開始\n");
+			printf("仕事の指示を開始\n");
 			// この100の処理はスレッドが処理をする
 			thread.job(100);
 			thread.job(200);
