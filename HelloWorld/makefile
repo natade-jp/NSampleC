@@ -7,4 +7,8 @@ Target = main.cpp
 ExeName = $(lastword $(subst /, ,$(dir $(realpath $(Target)))))
 
 $(ExeName) : $(Target)
-	g++ -std=c++0x -Wall -o $(ExeName) $(Target)
+	g++ -std=c++0x -O0 -Wall -o $(ExeName) $(Target)
+
+.PHONY: clean
+clean :
+	rm -f $(ExeName)

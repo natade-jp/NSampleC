@@ -7,7 +7,7 @@ Target = main.cpp
 ExeName = $(lastword $(subst /, ,$(dir $(realpath $(Target)))))
 
 $(ExeName) : $(Target)
-	g++ -Wall -o $(ExeName) $(Target)
+	g++ -O0 -Wall -o $(ExeName) $(Target)
 
 .PHONY: clean
 clean :

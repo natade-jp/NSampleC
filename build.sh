@@ -21,6 +21,7 @@ for DIRPATH in `\find ${DIRNAME} -maxdepth 5 -type d`; do
 	
 	#makefile があればmakeを実行する
 	if [ -e makefile ]; then
+		echo "make -> " ${FILEPATH}
 		make
 	fi
 done
