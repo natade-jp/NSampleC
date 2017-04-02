@@ -167,7 +167,7 @@ int main(void){
 			thread.job(400);
 			printf("仕事の指示を終了\n");
 		}
-		usleep(1000*100);
+		usleep(1000*500);
 		
 		printf("stop thread\n");
 		thread.stop();
