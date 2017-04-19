@@ -1,0 +1,49 @@
+作成したファイルを file と ldd をしてみた結果です。
+
+file	... ファイルの形式を表示させます。
+ldd		... 共有ライブラリの依存関係を表示します。
+
+
+$ file ./exe_a
+./exe_a: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, for GNU/Linux 2.6.32, BuildID[sha1]=48e7e71ec12d94ae40db9bebab9df70071eca789, not stripped
+$ ldd ./exe_a
+	linux-vdso.so.1 (0x7ecc2000)
+	/usr/lib/arm-linux-gnueabihf/libarmmem.so (0x76f66000)
+	libstdc++.so.6 => /usr/lib/arm-linux-gnueabihf/libstdc++.so.6 (0x76e77000)
+	libm.so.6 => /lib/arm-linux-gnueabihf/libm.so.6 (0x76dfc000)
+	libgcc_s.so.1 => /lib/arm-linux-gnueabihf/libgcc_s.so.1 (0x76dcf000)
+	libc.so.6 => /lib/arm-linux-gnueabihf/libc.so.6 (0x76c8e000)
+	/lib/ld-linux-armhf.so.3 (0x54b96000)
+
+$ file ./exe_so
+./exe_so: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, for GNU/Linux 2.6.32, BuildID[sha1]=7378108e058e2f2ce875838c14de56a66c90d18e, not stripped
+$ ldd ./exe_so
+	linux-vdso.so.1 (0x7eb8f000)
+	/usr/lib/arm-linux-gnueabihf/libarmmem.so (0x76fa0000)
+	libgetone_so.so => not found
+	libstdc++.so.6 => /usr/lib/arm-linux-gnueabihf/libstdc++.so.6 (0x76eb1000)
+	libm.so.6 => /lib/arm-linux-gnueabihf/libm.so.6 (0x76e36000)
+	libgcc_s.so.1 => /lib/arm-linux-gnueabihf/libgcc_s.so.1 (0x76e09000)
+	libc.so.6 => /lib/arm-linux-gnueabihf/libc.so.6 (0x76cc8000)
+	/lib/ld-linux-armhf.so.3 (0x54b33000)
+
+$ file ./getone.o
+./getone.o: ELF 32-bit LSB relocatable, ARM, EABI5 version 1 (SYSV), not stripped
+$ ldd ./getone.o
+	動的実行ファイルではありません
+
+$ file ./libgetone_a.a
+./libgetone_a.a: current ar archive
+$ ldd ./libgetone_a.a
+	動的実行ファイルではありません
+
+$ file ./libgetone_so.so
+./libgetone_so.so: ELF 32-bit LSB shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, BuildID[sha1]=c2b0b75a66622d481c512be12aa4a63404310e7a, not stripped
+$ ldd ./libgetone_so.so
+	linux-vdso.so.1 (0x7ef3e000)
+	/usr/lib/arm-linux-gnueabihf/libarmmem.so (0x76f4d000)
+	libstdc++.so.6 => /usr/lib/arm-linux-gnueabihf/libstdc++.so.6 (0x76e5e000)
+	libm.so.6 => /lib/arm-linux-gnueabihf/libm.so.6 (0x76de3000)
+	libgcc_s.so.1 => /lib/arm-linux-gnueabihf/libgcc_s.so.1 (0x76db6000)
+	libc.so.6 => /lib/arm-linux-gnueabihf/libc.so.6 (0x76c75000)
+	/lib/ld-linux-armhf.so.3 (0x54b1a000)
