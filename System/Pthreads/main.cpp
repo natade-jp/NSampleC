@@ -24,7 +24,7 @@ private:
 	pthread_mutex_t		kMyMutex;
 	pthread_mutex_t		kCondMutex;
 	pthread_cond_t		kCond;
-	queue<int>			kQueue;
+	queue<int>			cQueue;
 	
 	void vMainLoop() {
 		while(true) {
@@ -33,11 +33,11 @@ private:
 			// pthread_cond_wait は pthread_testcancel 代わりにもなる
 			pthread_cond_wait(&kCond, &kCondMutex);
 			
-			while(!kQueue.empty()) {
+			while(!cQueue.empty()) {
 				// 取り出して
-				int iNumber = kQueue.front();
+				int iNumber = cQueue.front();
 				// 取り出し終わったので削除
-				kQueue.pop();
+				cQueue.pop();
 				// 処理開始
 				printf("run[%d]\n", iNumber);
 			}
@@ -135,7 +135,7 @@ public:
 		
 		if(isRun == true) {
 			// 仕事を積む
-			kQueue.push(iNumber);
+			cQueue.push(iNumber);
 			
 			// wake / notify スレッドを起こす
 			pthread_cond_signal(&kCond);
