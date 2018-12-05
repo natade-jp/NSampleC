@@ -41,6 +41,15 @@ int main() {
 	
 	printf("* double *\n");
 	Func(1.4e-45 * 0.0000001);
+	
+	printf("* int vs float *\n");
+	Func(100 + 1.00f);
+	Func(1.00f + 100);
+	
+	printf("* float vs double *\n");
+	Func(1.00 + 1.00f);
+	Func(1.00f + 1.00);
+	
 	return 0;
 }
 
@@ -59,4 +68,10 @@ float[2.000000e+00]
 float[0.000000e+00]
 * double *
 double[1.400000e-52]
+* int vs float *
+float[1.010000e+02]
+float[1.010000e+02]
+* float vs double *
+double[2.000000e+00]
+double[2.000000e+00]
 */
