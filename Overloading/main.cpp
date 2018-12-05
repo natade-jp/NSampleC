@@ -46,12 +46,17 @@ int main() {
 
 /*
 ./Overloading 
-void
-unsigned char[FF]
-int[00000002]
-unsigned char[02]
-int[00000001]
+* unsigned char *
+unsigned char[0xFF]
+int[0x00000002]
+unsigned char[0x02]
+* unsigned long long *
+unsigned long long[0xff]
+unsigned long long[0x2]
+unsigned long long[0x2]
+* float *
 float[2.000000e+00]
 float[0.000000e+00]
+* double *
 double[1.400000e-52]
 */
