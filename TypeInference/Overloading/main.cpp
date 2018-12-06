@@ -2,67 +2,67 @@
 
 char strBuffer[256];
 
-char *format(void) {
+char *formatof(void) {
 	sprintf(strBuffer, "void");
 	return strBuffer;
 }
 
-char *format(signed char x) {
+char *formatof(signed char x) {
 	sprintf(strBuffer, "signed char[0x%02x]", x);
 	return strBuffer;
 }
 
-char *format(unsigned char x) {
+char *formatof(unsigned char x) {
 	sprintf(strBuffer, "unsigned char[0x%02x]", x);
 	return strBuffer;
 }
 
-char *format(signed short x) {
+char *formatof(signed short x) {
 	sprintf(strBuffer, "signed short[0x%04hx]", x);
 	return strBuffer;
 }
 
-char *format(unsigned short x) {
+char *formatof(unsigned short x) {
 	sprintf(strBuffer, "unsigned short[0x%04hx]", x);
 	return strBuffer;
 }
 
-char *format(signed long x) {
+char *formatof(signed long x) {
 	sprintf(strBuffer, "signed long[0x%08lx]", x);
 	return strBuffer;
 }
 
-char *format(unsigned long x) {
+char *formatof(unsigned long x) {
 	sprintf(strBuffer, "unsigned long[0x%08lx]", x);
 	return strBuffer;
 }
 
-char *format(signed long long x) {
+char *formatof(signed long long x) {
 	sprintf(strBuffer, "signed long long[0x%016llx]", x);
 	return strBuffer;
 }
 
-char *format(unsigned long long x) {
+char *formatof(unsigned long long x) {
 	sprintf(strBuffer, "unsigned long long[0x%016llx]", x);
 	return strBuffer;
 }
 
-char *format(int x) {
+char *formatof(int x) {
 	sprintf(strBuffer, "int[%d]", x);
 	return strBuffer;
 }
 
-char *format(float x) {
+char *formatof(float x) {
 	sprintf(strBuffer, "float[%e]", x);
 	return strBuffer;
 }
 
-char *format(double x) {
+char *formatof(double x) {
 	sprintf(strBuffer, "double[%e]", x);
 	return strBuffer;
 }
 
-#define printType(value) printf("%s, size=%d\n", format(value), sizeof(value));
+#define printType(value) printf("%s, size=%d\n", formatof(value), sizeof(value));
 
 int main() {
 	printf("* unsigned char\n");
