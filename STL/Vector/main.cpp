@@ -65,3 +65,16 @@ int main(){
 	}
 	return 0;
 }
+
+/*
+$ ./Vector 
+make 1
+func 1
+make 2
+delete 2
+func 2
+delete 2
+make 3
+func 3
+delete 3
+*/
