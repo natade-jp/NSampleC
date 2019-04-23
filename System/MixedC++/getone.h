@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-int getone( void );
+extern int getone( void );
 
 #ifdef __cplusplus
 }
