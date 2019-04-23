@@ -45,3 +45,22 @@ int main(){
 	}
 	return 0;
 }
+
+/*
+# make
+g++ -std=c++0x -O0 -Wall -o StringType main.cpp
+./Strmain.cpp: In function 'int main()':
+main.cpp:38:13: warning: variable 'x' set but not used [-Wunused-but-set-variable]
+   mystring *x;
+
+# ./StringType
+test1
+scope1
+delete
+scope2
+delete
+test2
+scope1
+delete
+scope2
+*/

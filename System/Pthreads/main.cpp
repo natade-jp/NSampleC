@@ -162,9 +162,13 @@ int main(void){
 		{
 			printf("仕事の指示を開始\n");
 			thread.job(100);
+			sleep(1);
 			thread.job(200);
+			sleep(1);
 			thread.job(300);
+			sleep(1);
 			thread.job(400);
+			sleep(1);
 			printf("仕事の指示を終了\n");
 		}
 		usleep(1000*500);
@@ -176,3 +180,17 @@ int main(void){
 	return 0;
 }
 
+/*
+上手くいく場合といかない場合がある・・・？
+
+# ./Pthreads
+start thread
+仕事の指示を開始
+run[100]
+run[200]
+run[300]
+run[400]
+仕事の指示を終了
+stop thread
+
+*/

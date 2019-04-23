@@ -30,7 +30,7 @@ int testcase2() {
 
 
 int main() {
-	// ‚¤‚Ü‚­‚¢‚©‚È‚¢EEE
+	// ã†ã¾ãã„ã‹ãªã„ãƒ»ãƒ»ãƒ»
 	/*
 	feenableexcept(FE_ALL_EXCEPT);
 	feenableexcept(FE_DIVBYZERO);

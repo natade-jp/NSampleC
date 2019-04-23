@@ -75,3 +75,12 @@ int main(void){
 	test();
 	return 0;
 }
+
+/*
+# ./Stopwatch
+計測スタート
+計測ストップ
+実時間 1000.229413 ms
+CPU時間 0.120104 ms
+CPU使用率 0.0 %
+*/

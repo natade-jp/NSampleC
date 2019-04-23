@@ -321,6 +321,37 @@ int main(int argc, char* argv[]){
 	return 0;
 }
 
+/*
+# ./sh_StartTestProgram.sh
+unlink: cannot unlink '/tmp/local_socket_test': No such file or directory
+Enterキーを入力するとテストが始まります。
+※テストが終わるまでCtrl+C 入力禁止
 
+サーバーを起動させます
+クライアントを起動させます
+Enterキーを入力すると終了します。
+[Client] timer [1]
+[Server] timer [1]
+[Server] timer [2]
+[Client] timer [2]
+[Server] socket send [Hello! I'm Server. My count is 2.][33]
+[Client] socket receive [Hello! I'm Server. My count is 2.][33]
+[Server] timer [3]
+[Client] timer [4]
+[Server] timer [4]
+[Client] timer [5]
+[Client] socket send [Hello! I'm Client. My count is 5.][33]
+[Server] socket send [Hello! I'm Server. My count is 4.][33]
+[Server] socket receive [Hello! I'm Client. My count is 5.][33]
+[Client] socket receive [Hello! I'm Server. My count is 4.][33]
+[Server] timer [6]
+[Client] timer [7]
+[Client] socket send [Hello! I'm Client. My count is 7.][33]
+[Server] socket send [Hello! I'm Server. My count is 6.][33]
+[Server] socket receive [Hello! I'm Client. My count is 7.][33]
+[Client] socket receive [Hello! I'm Server. My count is 6.][33]
+[Server] timer [8]
+[Client] timer [9]
+*/
 
 

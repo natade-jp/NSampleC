@@ -88,3 +88,12 @@ int main(){
 	delete fileop;
 	return 0;
 }
+
+/*
+# ./ShowDirent
+フォルダ .
+フォルダ ..
+フォルダ 1
+フォルダ 2
+フォルダ 3
+*/

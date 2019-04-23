@@ -1,26 +1,26 @@
 # makefile
 
-# ŽÀs—p
+# å®Ÿè¡Œç”¨
 all: exe_a exe_so
 	@echo done.
 
-# ‹¤—Lƒ‰ƒCƒuƒ‰ƒŠi“®“Iƒ‰ƒCƒuƒ‰ƒŠj‚ðŽg—p‚µ‚ÄƒRƒ“ƒpƒCƒ‹
+# å…±æœ‰ãƒ©ã‚¤ãƒ–ãƒ©ãƒªï¼ˆå‹•çš„ãƒ©ã‚¤ãƒ–ãƒ©ãƒªï¼‰ã‚’ä½¿ç”¨ã—ã¦ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 exe_so : main.cpp libgetone_so.so
 	g++ -O0 -Wall -o exe_so main.cpp -L./ -lgetone_so
 
-# Ã“Iƒ‰ƒCƒuƒ‰ƒŠ‚ðŽg—p‚µ‚ÄƒRƒ“ƒpƒCƒ‹
+# é™çš„ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’ä½¿ç”¨ã—ã¦ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 exe_a : main.cpp libgetone_a.a
 	g++ -O0 -Wall -o exe_a main.cpp -L./ -lgetone_a
 
-# Ã“Iƒ‰ƒCƒuƒ‰ƒŠ‚ÍAoƒtƒ@ƒCƒ‹‚ðƒA[ƒJƒCƒu‰»‚µ‚½‚à‚Ì‚Å‚ ‚é
+# é™çš„ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã¯ã€oãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–åŒ–ã—ãŸã‚‚ã®ã§ã‚ã‚‹
 libgetone_a.a : getone.o
 	ar r libgetone_a.a getone.o
 
-# ‹¤—Lƒ‰ƒCƒuƒ‰ƒŠi“®“Iƒ‰ƒCƒuƒ‰ƒŠj‚ÍA0ƒtƒ@ƒCƒ‹‚É -shared ‚ð•t‚¯‚ê‚Îì¬‚Å‚«‚é
+# å…±æœ‰ãƒ©ã‚¤ãƒ–ãƒ©ãƒªï¼ˆå‹•çš„ãƒ©ã‚¤ãƒ–ãƒ©ãƒªï¼‰ã¯ã€0ãƒ•ã‚¡ã‚¤ãƒ«ã« -shared ã‚’ä»˜ã‘ã‚Œã°ä½œæˆã§ãã‚‹
 libgetone_so.so : getone.o
 	g++ -shared getone.o -o libgetone_so.so
 
-# ƒRƒ“ƒpƒCƒ‹‚ð‚µ‚ÄAƒIƒuƒWƒFƒNƒgƒtƒ@ƒCƒ‹‚ðì¬‚·‚é
+# ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã‚’ã—ã¦ã€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã™ã‚‹
 getone.o : getone.cpp
 	g++ -O0 -Wall -fPIC getone.cpp -c
 

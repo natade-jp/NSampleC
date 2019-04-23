@@ -29,3 +29,17 @@ int main(){
 	func();
 	return 0;
 }
+
+/*
+# make
+g++ -std=c++0x -O0 -Wall -o Destructor main.cpp
+main.cpp: In function 'void func()':
+main.cpp:24:12: warning: unused variable 'cl' [-Wunused-variable]
+  { Class2 *cl = new Class2("test2"); } // delete忘れでメモリリーク
+            ^
+
+# ./Destructor
+class2test1
+class2test3
+
+*/

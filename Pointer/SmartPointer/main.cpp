@@ -63,3 +63,25 @@ int main(){
 	func();
 	return 0;
 }
+
+/*
+# ./SmartPointer
+func test1
+end test1
+func test2
+func test3
+end test3
+func test4
+end test4
+func test5
+end test5
+end test6
+func test7
+end test7
+func test8
+end test8
+func test9
+point 1
+point 2
+end test9
+*/

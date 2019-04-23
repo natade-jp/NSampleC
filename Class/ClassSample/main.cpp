@@ -32,3 +32,10 @@ int main(){
 	delete sc;
 	return 0;
 }
+
+/*
+# ./ClassSample
+コンストラクタ
+あいうえお
+デストラクタ
+*/

@@ -1,17 +1,17 @@
 # makefile
 
-# ƒRƒ“ƒpƒCƒ‹‚µ‚½‚¢ƒtƒ@ƒCƒ‹
+# ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã—ãŸã„ãƒ•ã‚¡ã‚¤ãƒ«
 Target = main.cpp
 
-# ƒtƒHƒ‹ƒ_–¼‚ğÀsƒtƒ@ƒCƒ‹–¼‚É‚·‚é
+# ãƒ•ã‚©ãƒ«ãƒ€åã‚’å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«åã«ã™ã‚‹
 ExeName = $(lastword $(subst /, ,$(dir $(realpath $(Target)))))
 
-# lpthread ‚ğ•t‚¯‚È‚¢‚ÆƒGƒ‰[‚ª”­¶‚·‚é
+# lpthread ã‚’ä»˜ã‘ãªã„ã¨ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã™ã‚‹
 # g++ -O0 -Wall -o Thread main.cpp
-# /tmp/ccW8MKoE.o: ŠÖ” `Thread::iMakeThread()' “à:
-# main.cpp:(.text._ZN6Thread11iMakeThreadEv[_ZN6Thread11iMakeThreadEv]+0x30): `pthread_create' ‚É‘Î‚·‚é’è‹`‚³‚ê‚Ä‚¢‚È‚¢QÆ‚Å‚·
-# /tmp/ccW8MKoE.o: ŠÖ” `Thread::stop()' “à:
-# main.cpp:(.text._ZN6Thread4stopEv[_ZN6Thread4stopEv]+0x88): `pthread_join' ‚É‘Î‚·‚é’è‹`‚³‚ê‚Ä‚¢‚È‚¢QÆ‚Å‚·
+# /tmp/ccW8MKoE.o: é–¢æ•° `Thread::iMakeThread()' å†…:
+# main.cpp:(.text._ZN6Thread11iMakeThreadEv[_ZN6Thread11iMakeThreadEv]+0x30): `pthread_create' ã«å¯¾ã™ã‚‹å®šç¾©ã•ã‚Œã¦ã„ãªã„å‚ç…§ã§ã™
+# /tmp/ccW8MKoE.o: é–¢æ•° `Thread::stop()' å†…:
+# main.cpp:(.text._ZN6Thread4stopEv[_ZN6Thread4stopEv]+0x88): `pthread_join' ã«å¯¾ã™ã‚‹å®šç¾©ã•ã‚Œã¦ã„ãªã„å‚ç…§ã§ã™
 # collect2: error: ld returned 1 exit status
 # makefile:10: recipe for target 'Thread' failed
 

@@ -19,3 +19,9 @@ int main(){
 	
 	return 0;
 }
+
+/*
+# ./StringTest
+ヒープ領域
+スタック領域
+*/

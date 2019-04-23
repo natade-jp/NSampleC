@@ -1,16 +1,16 @@
 # makefile
 
-# ƒRƒ“ƒpƒCƒ‹‚µ‚½‚¢ƒtƒ@ƒCƒ‹
+# ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã—ãŸã„ãƒ•ã‚¡ã‚¤ãƒ«
 Target = main.cpp
 
-# ƒtƒHƒ‹ƒ_–¼‚ğÀsƒtƒ@ƒCƒ‹–¼‚É‚·‚é
+# ãƒ•ã‚©ãƒ«ãƒ€åã‚’å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«åã«ã™ã‚‹
 ExeName = $(lastword $(subst /, ,$(dir $(realpath $(Target)))))
 
-# C++0x ‚Ì‹@”\‚Ì thread ‚ğg—p‚µ‚Ä‚¢‚é‚ªApthread ƒ‰ƒCƒuƒ‰ƒŠ‚ğ•t‚¯‚È‚¢‚ÆƒGƒ‰[‚ª”­¶‚·‚é
+# C++0x ã®æ©Ÿèƒ½ã® thread ã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹ãŒã€pthread ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’ä»˜ã‘ãªã„ã¨ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã™ã‚‹
 # pi@raspberrypi:~/git/NSampleC/System/Threads $ make
 # g++ -O0 -std=c++0x -Wall -o Threads main.cpp
-# /tmp/cc5skISF.o: ŠÖ” `std::thread::thread<void* (&)(void*), Thread*>(void* (&)(void*), Thread*&&)' “à:
-# main.cpp:(.text._ZNSt6threadC2IRFPvS1_EIP6ThreadEEEOT_DpOT0_[_ZNSt6threadC5IRFPvS1_EIP6ThreadEEEOT_DpOT0_]+0xd4): `pthread_create' ‚É‘Î‚·‚é’è‹`‚³‚ê‚Ä‚¢‚È‚¢QÆ ‚Å‚·
+# /tmp/cc5skISF.o: é–¢æ•° `std::thread::thread<void* (&)(void*), Thread*>(void* (&)(void*), Thread*&&)' å†…:
+# main.cpp:(.text._ZNSt6threadC2IRFPvS1_EIP6ThreadEEEOT_DpOT0_[_ZNSt6threadC5IRFPvS1_EIP6ThreadEEEOT_DpOT0_]+0xd4): `pthread_create' ã«å¯¾ã™ã‚‹å®šç¾©ã•ã‚Œã¦ã„ãªã„å‚ç…§ ã§ã™
 # collect2: error: ld returned 1 exit status
 # makefile:10: recipe for target 'Threads' failed
 # make: *** [Threads] Error 1

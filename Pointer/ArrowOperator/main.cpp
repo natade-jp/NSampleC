@@ -7,26 +7,38 @@ typedef struct {
 
 int main(){
 	{
-		// 1‚Â‚Ì\‘¢‘Ì‚Ì‚İŠm•Û‚·‚éê‡
+		// 1ã¤ã®æ§‹é€ ä½“ã®ã¿ç¢ºä¿ã™ã‚‹å ´åˆ
 		Struct *kTest = NULL;
 		kTest = new Struct;
-		kTest->y = 999;		// ƒAƒ[‰‰Zq‚É‚æ‚é‘ã“ü
+		kTest->y = 999;		// ã‚¢ãƒ­ãƒ¼æ¼”ç®—å­ã«ã‚ˆã‚‹ä»£å…¥
 		printf("Test 1\n");
-		printf("[%d]\n", kTest->y);	// © •ª‚©‚è‚â‚·‚¢I
-		printf("[%d]\n", (*kTest).y);	// © •ª‚©‚è‚É‚­‚¢
-		printf("[%d]\n", kTest[0].y);	// © •ª‚©‚è‚É‚­‚¢
+		printf("[%d]\n", kTest->y);	// â† åˆ†ã‹ã‚Šã‚„ã™ã„ï¼
+		printf("[%d]\n", (*kTest).y);	// â† åˆ†ã‹ã‚Šã«ãã„
+		printf("[%d]\n", kTest[0].y);	// â† åˆ†ã‹ã‚Šã«ãã„
 		delete kTest;
 	}
 	{
-		// \‘¢‘Ì‚Ì”z—ñ‚ğŠm•Û‚·‚éê‡
+		// æ§‹é€ ä½“ã®é…åˆ—ã‚’ç¢ºä¿ã™ã‚‹å ´åˆ
 		Struct *kTest = NULL;
 		kTest = new Struct[10];
-		kTest[9].y = 999;	// ƒAƒ[‰‰Z‚µ‚æ‚è”z—ñ‚ğg—p‚µ‚½‚Ù‚¤‚ª—Ç‚¢
+		kTest[9].y = 999;	// ã‚¢ãƒ­ãƒ¼æ¼”ç®—ã—ã‚ˆã‚Šé…åˆ—ã‚’ä½¿ç”¨ã—ãŸã»ã†ãŒè‰¯ã„
 		printf("Test 2\n");
-		printf("[%d]\n", (kTest+9)->y);	// © •ª‚©‚è‚É‚­‚¢
-		printf("[%d]\n", (*(kTest+9)).y);	// © •ª‚©‚è‚É‚­‚¢
-		printf("[%d]\n", kTest[9].y);		// © •ª‚©‚è‚â‚·‚¢I
+		printf("[%d]\n", (kTest+9)->y);	// â† åˆ†ã‹ã‚Šã«ãã„
+		printf("[%d]\n", (*(kTest+9)).y);	// â† åˆ†ã‹ã‚Šã«ãã„
+		printf("[%d]\n", kTest[9].y);		// â† åˆ†ã‹ã‚Šã‚„ã™ã„ï¼
 		delete kTest;
 	}
 	return 0;
 }
+
+/*
+# ./ArrowOperator
+Test 1
+[999]
+[999]
+[999]
+Test 2
+[999]
+[999]
+[999]
+*/

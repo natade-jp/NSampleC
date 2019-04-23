@@ -32,3 +32,8 @@ int main(void){
 	showDate();
 	return 0;
 }
+
+/*
+# ./Time
+2019/04/24 00:00:00
+*/

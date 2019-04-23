@@ -12,7 +12,7 @@ int main(void){
 	int iSize	= sizeof(int) * iLength;
 	
 	{
-		// malloc �͏���������Ă��Ȃ�
+		// malloc は初期化されていない
 		
 		int *piData = NULL;
 		piData = (int *)malloc(iSize);
@@ -29,7 +29,7 @@ int main(void){
 	}
 	
 	{
-		// calloc �͏���������Ă���
+		// calloc は初期化されている
 		
 		int *piData = NULL;
 		piData = (int *)calloc(iSize, 1);
@@ -46,10 +46,10 @@ int main(void){
 	}
 	
 	{
-		// alloca �֐����甲����Ƃ��Ɏ����ŉ�������
+		// alloca 関数から抜けるときに自動で解放される
 		
 		int *piData = NULL;
-		piData = (int *)alloca(iSize); // NULL�Ŗ߂邱�Ƃ͂Ȃ�
+		piData = (int *)alloca(iSize); // NULLで戻ることはない
 		
 		printf("alloca\n");
 		for(i = 0; i < iLength; i++) {
@@ -63,3 +63,21 @@ int main(void){
 	return 0;
 }
 
+/*
+# ./Alloca
+malloc
+[0][0]
+[1][0]
+[2][0]
+[3][0]
+calloc
+[0][0]
+[1][0]
+[2][0]
+[3][0]
+alloca
+[0][0]
+[1][1]
+[2][4]
+[3][9]
+*/

@@ -11,3 +11,8 @@ int main(void){
 	return 0;
 }
 
+/*
+# ./Printf
+hello world!
+hello world!
+*/

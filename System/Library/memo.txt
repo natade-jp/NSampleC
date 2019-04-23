@@ -1,7 +1,7 @@
-ì¬‚µ‚½ƒtƒ@ƒCƒ‹‚ğ file ‚Æ ldd ‚ğ‚µ‚Ä‚İ‚½Œ‹‰Ê‚Å‚·B
+ä½œæˆã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã‚’ file ã¨ ldd ã‚’ã—ã¦ã¿ãŸçµæœã§ã™ã€‚
 
-file	... ƒtƒ@ƒCƒ‹‚ÌŒ`®‚ğ•\¦‚³‚¹‚Ü‚·B
-ldd		... ‹¤—Lƒ‰ƒCƒuƒ‰ƒŠ‚ÌˆË‘¶ŠÖŒW‚ğ•\¦‚µ‚Ü‚·B
+file	... ãƒ•ã‚¡ã‚¤ãƒ«ã®å½¢å¼ã‚’è¡¨ç¤ºã•ã›ã¾ã™ã€‚
+ldd		... å…±æœ‰ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®ä¾å­˜é–¢ä¿‚ã‚’è¡¨ç¤ºã—ã¾ã™ã€‚
 
 
 $ file ./exe_a
@@ -30,12 +30,12 @@ $ ldd ./exe_so
 $ file ./getone.o
 ./getone.o: ELF 32-bit LSB relocatable, ARM, EABI5 version 1 (SYSV), not stripped
 $ ldd ./getone.o
-	“®“IÀsƒtƒ@ƒCƒ‹‚Å‚Í‚ ‚è‚Ü‚¹‚ñ
+	å‹•çš„å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ã§ã¯ã‚ã‚Šã¾ã›ã‚“
 
 $ file ./libgetone_a.a
 ./libgetone_a.a: current ar archive
 $ ldd ./libgetone_a.a
-	“®“IÀsƒtƒ@ƒCƒ‹‚Å‚Í‚ ‚è‚Ü‚¹‚ñ
+	å‹•çš„å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«ã§ã¯ã‚ã‚Šã¾ã›ã‚“
 
 $ file ./libgetone_so.so
 ./libgetone_so.so: ELF 32-bit LSB shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, BuildID[sha1]=c2b0b75a66622d481c512be12aa4a63404310e7a, not stripped

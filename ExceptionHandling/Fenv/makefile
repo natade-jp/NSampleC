@@ -1,9 +1,9 @@
 # makefile
 
-# コンパイルしたいファイル
+# 繧ｳ繝ｳ繝代う繝ｫ縺励◆縺�繝輔ぃ繧､繝ｫ
 Target = main.cpp
 
-# フォルダ名を実行ファイル名にする
+# 繝輔か繝ｫ繝蜷阪ｒ螳溯｡後ヵ繧｡繧､繝ｫ蜷阪↓縺吶ｋ
 ExeName = $(lastword $(subst /, ,$(dir $(realpath $(Target)))))
 
 $(ExeName) : $(Target)

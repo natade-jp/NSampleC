@@ -254,3 +254,16 @@ int main(){
 	}
 	return 0;
 }
+
+/*
+# ./File
+TestDirectory
+isExist 1
+isFile 0
+isDirectory 1
+isExist 0
+fwrite ABCDEFG
+fread ABCDE
+write ABCDEFG
+read ABCDE
+*/

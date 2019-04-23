@@ -159,3 +159,14 @@ int main(void){
 	return 0;
 }
 
+/*
+# ./Thread
+start thread
+仕事の指示を開始
+run[100]
+run[200]
+run[300]
+run[400]
+仕事の指示を終了
+stop thread
+*/
